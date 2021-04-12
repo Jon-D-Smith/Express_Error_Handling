@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 
-const AppError = require('./AppError');
+// const AppError = require('./AppError');
 
 app.use(morgan('tiny'));
 
@@ -42,6 +42,11 @@ app.get('/secret', verifyPassword, (req, res) => {
 
 app.use((req, res) => {
     res.status(404).send('NOT FOUND!')
+})
+
+app.use(function (err, req, res, next) {
+    console.log("There has been and error!!!")
+    next(err)
 })
 
 
